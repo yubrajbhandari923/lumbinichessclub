@@ -1,4 +1,4 @@
-
+/* 
 @font-face {
     font-family: acme;
     src: url(acme.ttf);
@@ -51,9 +51,9 @@
 @font-face {
     font-family: Cabin;
     src: url(Cabin.ttf);
-}
+} */
 
-@font-face {
+/* @font-face {
     font-family: ChauPhilomeneOne;
     src: url(ChauPhilomeneOne.ttf);
 }
@@ -82,8 +82,8 @@
 @font-face {
     font-family: InknutAntiqua;
     src: url(InknutAntiqua.ttf);
-}
-
+} */
+/* 
 @font-face {
     font-family: JosefinSans;
     src: url(JosefinSans.ttf);
@@ -193,13 +193,13 @@
     font-family: raleway;
     src: url(Raleway-Regular.ttf);
 }
+ */
 
-
-
+/* 
 @font-face {
     font-family: majormonodisplay;
     src: url(MajorMonoDisplay-Regular.ttf);
-}
+} */
 
 
 @font-face {
