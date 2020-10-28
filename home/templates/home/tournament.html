@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static '/home/css/tournament_page.css' %}">
+
+{% endblock %}
+{% block title_txt %} {{ page.tournament_name }} {% endblock %}
+{% block subtitle_txt %} Tournament. Lumbini Chess Club. {% endblock %}
+{% block header_btns %}
+<div class="textbox__btn" onclick="window.location = '{{ page.get_parent.url }}'"> Return to Tournaments list</div>
+{% endblock %}
+{% block content %}
+<section class="content__container">
+    {% if page.poster %}
+    <div class="featured-tournament__container">
+        <div class="ft-img__container">
+            <div class="featured-tour-svg ft-svg1"><img src="{% static '/home/svg/smtour1.svg' %}" alt=""></div>
+            <div class="featured-tour-svg ft-svg2"><img src="{% static '/home/svg/smtour2.svg' %}" alt=""></div>
+            <div class="featured-tour-svg ft-svg3"><img src="{% static '/home/svg/smtour3.svg' %}" alt=""></div>
+
+            <img data-aos="fade-up" src="{{ page.poster.url }}" alt="">
+        </div>
+    </div>
+    {% endif %}
+    <div class="text">
+
+        <p>
+            <b>Tournament Name:</b><span>{{ page.tournament_name }}</span>
+        </p>
+        <p>
+            <b>Tournament Start Date:</b><span>{{ page.tournament_date }}</span>
+        </p>
+        <p>
+            <b>More Information:</b>
+            {{ page.information|richtext }}
+        </p>
+    </div>
+
+    <!-- <p><a href="{{ page.get_parent.url }}">Return to All tournaments</a></p> -->
+</section>
+{% endblock %}
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.tour-nav-btn').classList.add('active__page')
+    })
+</script>
+{% endblock %}

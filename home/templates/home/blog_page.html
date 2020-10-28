@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailroutablepage_tags %}
+\
+{% block extra_css%}
+<link rel="stylesheet" href="{% static '/home/css/blog_page.css' %}">
+<link rel="stylesheet" href="{% static '/home/fonts/fonts.css' %}">
+
+{% endblock %}
+
+
+{% block title_txt %} BLOG. {% endblock %}
+{% block subtitle_txt %} Lumbini Chess Club. {% endblock %}
+{% block header_btns %}
+<div class="textbox__btn" onclick="window.location = window.origin"> Return Home</div>
+{% endblock %}
+{% block content %}
+<section class="content__container">
+    {% if search_term %}
+    <div class="search__text">
+        <h1 class="page-title">Search Results for <span>{{ search_type }}: {{ search_term }}</span></h1>
+    </div>
+    {% endif %}
+
+    <form role="search" method="get" class="form-search" action="{% routablepageurl blog_page "post_search" %}"
+        method="get">
+        <input type="text" class="form-control search-query" name="q" placeholder="Search&hellip;"
+            title="Search for:" />
+        <button type="submit" class="btn btn-default" name="submit" id="searchsubmit" value="Search">
+            Search
+        </button>
+    </form>
+
+    <div class="intro">{{ page.description }}</div>
+    <div class="posts__container">
+        {% for post in posts %}
+
+        <a href="{% pageurl post %}">
+
+            <div class="post__container">
+                {% if post.feed_image %}
+                <!-- <img src="{{ post.feed_image.url }}" alt=""> -->
+                {% endif %}
+                <div class="post__poster">
+                    <img src="{% static '/home/img/img4-min.jpg' %}" alt="">
+                </div>
+                <div class="post__info">
+                    <div class="post__title">
+                        <h2>
+                            {{ post.title|truncatewords:15 }}
+                        </h2>
+                    </div>
+                    <div class="post__mintext">
+                        {{ post.body|truncatewords:25|richtext }}
+                    </div>
+                    <div class="post__date">
+                        {{ post.date }}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</section>
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.blog-nav-btn').classList.add('active__page')
+    })
+</script>
+{% endblock %}

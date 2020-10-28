@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=lccwebsite_db
+    env_file: 
+      - ./.env
+
+  web:
+    build: .
+    expose: 
+      - 8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    volumes:
+      - .:/usr/src/app/
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+      
+      
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+
+    ports:
+      - 80:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

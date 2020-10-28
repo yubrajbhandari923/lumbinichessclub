@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
+
+{% block extra_css%}
+<link rel="stylesheet" href="{% static '/home/css/tournamentlist_page.css' %}">
+
+{% endblock %}
+
+
+{% block title_txt %} TOURNAMENTS. {% endblock %}
+{% block subtitle_txt %} Lumbini Chess Club. {% endblock %}
+{% block header_btns %}
+<div class="textbox__btn" onclick="window.location = window.origin"> Return Home</div>
+{% endblock %}
+{% block content %}
+<section class="content__container">
+
+    <!-- <div class="intro">{{ page.description }}</div> -->
+    {% if featured_tournaments.count %}
+    <div class="sub-section__container">
+        <div class="sub-section__header">Featured tournament.</div>
+        <div class="featured-tournament__container">
+            <div class="ft-img__container">
+                <div class="featured-tour-svg ft-svg1"><img src="{% static '/home/svg/smtour1.svg' %}" alt=""></div>
+                <div class="featured-tour-svg ft-svg2"><img src="{% static '/home/svg/smtour2.svg' %}" alt=""></div>
+                <div class="featured-tour-svg ft-svg3"><img src="{% static '/home/svg/smtour3.svg' %}" alt=""></div>
+
+                {% for tour in featured_tournaments %}
+                {% if tour.poster %}
+                <img data-aos="fade-up" src="{{ tour.poster.url }}" alt="">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="sub-section__container">
+        <div class="sub-section__header">Recent Tournaments.</div>
+        <div class="tour-archive__container">
+            <img class="tour-archive-bg" src="{% static '/home/svg/tourarchive.svg' %}" alt="">
+            <div class="tour-archive" data-aos="fade-up" id="tapp">
+                {% for tour in tournaments %}
+                <div class="tour-one">
+                    <div class="tour-one-pic"><img src="{% static '/home/svg/chess/016-chess-5.svg' %}" alt="">
+                    </div>
+                    <div class="tour-one-name"> {{ tour.tournament_name }} </div>
+                    <div class="tour-one-date"><strong>Date:</strong> {{ tour.tournament_date }} </div>
+                    <div class="tour-one-tags">
+                        {% for tag in tour.tags.all %}
+                        {% if forloop.counter < 4 %}
+                        <div class="div">{{ tag }}</div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="tour-one-btn" onclick="window.location = window.origin +'{{ tour.url }}' "> More
+                        Info
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.tour-nav-btn').classList.add('active__page')
+    })
+</script>
+{% endblock %}

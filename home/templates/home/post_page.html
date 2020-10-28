@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailroutablepage_tags %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static '/home/css/post_page.css' %}">
+<link rel="stylesheet" href="{% static '/home/fonts/fonts.css' %}">
+
+{% endblock %}
+
+{% block title_txt %} {{ page.title }} {% endblock %}
+{% block subtitle_txt %} Blog. Lumbini Chess Club. {% endblock %}
+{% block header_btns %}
+<div class="textbox__btn" onclick="window.location = '{{ page.get_parent.url }}'"> Return to Blog</div>
+{% endblock %}
+{% block content %}
+<div class="content__container">
+    <div class="text">
+        {{ page.body|richtext }}
+    </div>
+
+    {% if page.tags.all.count %}
+    <div class="tags">
+        <h3>Tags</h3>
+        {% for tag in page.tags.all %}
+        <a href="{% routablepageurl blog_page 'post_by_tag' tag.slug %}"><button type="button">{{ tag }}</button></a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.blog-nav-btn').classList.add('active__page')
+    })
+</script>
+{% endblock %}

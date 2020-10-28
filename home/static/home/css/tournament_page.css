@@ -1,0 +1,40 @@
+.featured-tournament__container{
+    display: flex;
+    flex-flow: column;
+    margin-left: 50px;
+    align-items: center;
+    width:100vw;
+}
+.ft-img__container{
+    width: max-content;
+    position: relative;
+}
+.ft-img__container > img{
+    width: calc(100vw - 150px);
+    margin-top: 30px;
+    max-width: 500px;
+}
+.featured-tour-svg{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    z-index: -10;
+}
+.featured-tour-svg img{
+    width: 100%;
+    height: 100%;
+}
+.ft-svg1 {
+    top: 10%;
+    left: -20%;
+    
+}
+.ft-svg2 {
+    top: 50%;
+    left: 90%;
+    
+}
+.ft-svg3 {
+    top: 90%;
+    left: 60%;    
+}
