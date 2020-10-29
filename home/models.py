@@ -19,8 +19,8 @@ from taggit.models import TaggedItemBase, Tag as TaggitTag
 
 
 class HomePage(Page):
-    is_creatable = False
-    about_us_text = RichTextField(blank=True)
+    is_creatable = True
+    about_us_text = RichTextField(blank=True, default="Lorem ipsum")
     content_panels = Page.content_panels + [
         FieldPanel(
             "about_us_text",
